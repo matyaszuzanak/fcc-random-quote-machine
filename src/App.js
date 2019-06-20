@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { random } from 'lodash';
 import './App.css';
 import Button from './components/button';
 
@@ -18,7 +19,10 @@ class App extends Component {
   }
   
   selectedQuoteIndex() {
-    
+    if (!this.quotes.length) {
+      return;
+    }
+    return random(0, this.quotes.length - 1);  
   }
 
   render() {
