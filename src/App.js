@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import 'lodash';
+import { random } from 'lodash';
 import './App.css';
 import Button from './components/button';
 
