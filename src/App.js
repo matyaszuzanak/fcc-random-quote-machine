@@ -38,7 +38,7 @@ class App extends Component {
   render() {
     return (
       <div className="App" id="quote-box">
-        { this.selectedQuote ? this.selectedQuote.quotes : '' }
+        { this.selectedQuote ? `"${this.selectedQuote.quote}" - ${this.selectedQuote.author}` : '' }
         <Button buttonDisplayName="Next Quote" clickHandler={this.nextQuoteClickHandler}/>
       </div>
     );
