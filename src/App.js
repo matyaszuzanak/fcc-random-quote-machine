@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { random } from 'lodash';
 import './App.css';
-import Button from './components/button';
+import QuoteMachine from './components/QuoteMachine';
 
 class App extends Component {
   constructor(props) {
@@ -10,36 +10,41 @@ class App extends Component {
       quotes: [],
       selectedQuoteIndex: null
     }
-    this.selectQuoteIndex = this.selectQuoteIndex.bind(this);
+    this.assignNewQuoteIndex = this.assignNewQuoteIndex.bind(this);
+    this.selectQuoteIndex = this.generateNewQuoteIndex.bind(this);
   }
   
   componentDidMount() {
     fetch('https://gist.githubusercontent.com/shreyasminocha/7d5dedafc1fe158f82563c1223855177/raw/325d51aca7165b2498971afcff9bed286a52dc0e/quotes.json')
       .then(data => data.json())
-      .then(quotes => this.setState({ quotes }, () => {
-        this.setState({ selectedQuoteIndex: this.selectQuoteIndex() })
-      }));
+      .then(quotes => this.setState({ quotes }, this.assignNewQuoteIndex));
   }
   
   get selectedQuote() {
     if (!this.state.quotes.length || !Number.isInteger(this.state.selectedQuoteIndex)) {
-      return;
+      return undefined;
     }
     return this.state.quotes[this.state.selectedQuoteIndex];
   }
-
-  selectQuoteIndex() {
+  
+  /**
+   * Returns an integer representing an index in array of quotes (state.quotes) 
+   */
+   generateNewQuoteIndex() {
     if (!this.state.quotes.length) {
-      return;
+      return undefined;
     }
     return random(0, this.state.quotes.length - 1);  
+  }
+
+  assignNewQuoteIndex() {
+    this.setState({ selectedQuoteIndex: this.generateNewQuoteIndex() });
   }
 
   render() {
     return (
       <div className="App" id="quote-box">
-        { this.selectedQuote ? `"${this.selectedQuote.quote}" - ${this.selectedQuote.author}` : '' }
-        <Button buttonDisplayName="Next Quote" clickHandler={this.nextQuoteClickHandler}/>
+        <QuoteMachine selectedQuote={this.selectedQuote} assignNewQuoteIndex={this.assignNewQuoteIndex} />
       </div>
     );
   }
