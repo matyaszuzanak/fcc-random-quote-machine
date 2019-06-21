@@ -29,7 +29,6 @@ class App extends Component {
   }
 
   render() {
-    console.log(this.state.selectQuoteIndex);
     return (
       <div className="App" id="quote-box">
         <Button buttonDisplayName="Next Quote" clickHandler={this.nextQuoteClickHandler}/>
