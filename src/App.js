@@ -25,7 +25,7 @@ class App extends Component {
     if (!this.state.quotes.length) {
       return;
     }
-    return random(0, this.state.quotes.length - 1);  
+    return _.random(0, this.state.quotes.length - 1);  
   }
 
   render() {
