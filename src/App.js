@@ -8,7 +8,7 @@ class App extends Component {
     super(props);
     this.state = {
       quotes: [],
-      selectedQuoteIndex: null
+      selectQuoteIndex: null
     }
     this.selectQuoteIndex = this.selectQuoteIndex.bind(this);
   }
@@ -17,7 +17,7 @@ class App extends Component {
     fetch('https://gist.githubusercontent.com/shreyasminocha/7d5dedafc1fe158f82563c1223855177/raw/325d51aca7165b2498971afcff9bed286a52dc0e/quotes.json')
       .then(data => data.json())
       .then(quotes => this.setState({ quotes }, () => {
-        this.setState({ selectedQuoteIndex: this.selectQuoteIndex() })
+        this.setState({ selectQuoteIndex: this.selectQuoteIndex() })
       }));
   }
   
@@ -25,7 +25,7 @@ class App extends Component {
     if (!this.state.quotes.length) {
       return;
     }
-    return _.random(0, this.state.quotes.length - 1);  
+    return random(0, this.state.quotes.length - 1);  
   }
 
   render() {
