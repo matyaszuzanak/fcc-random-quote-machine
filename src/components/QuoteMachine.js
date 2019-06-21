@@ -8,25 +8,26 @@ import Typography from '@material-ui/core/Typography';
 import { fontAwesomeIcon, FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTwitter } from '@fortawesome/free-brands-svg-icons';
 
-const QuoteMachine = (props) => (
+/**
+ * Instead of using (props) I can use ({ assignNewQuoteIndex, selectedQuote }) and don't have to use props. before them when used below
+ */
+const QuoteMachine = ({ assignNewQuoteIndex, selectedQuote }) => (
     <Card>
         <CardContent>
-           { 
-                props.selectedQuote ?
-                (
-                    <Typography>
-                        {props.selectedQuote.quote} - {props.selectedQuote.author}
-                    </Typography>
-                ) : null
-            }    
+            <Typography id="text">
+                {selectedQuote.quote} - <span id="author">{selectedQuote.author}</span>
+            </Typography>    
         </CardContent>
         <CardActions>
-            <Button size="small" onClick={props.assignNewQuoteIndex}>Next Quote</Button>
-            <IconButton>
-                <FontAwesomeIcon> icon={faTwitter} size="md"</FontAwesomeIcon>
+            <Button id="new-quote" size="small" onClick={assignNewQuoteIndex}>Next Quote</Button>
+            <IconButton
+                id="tweet-quote"
+                targer="_blank"
+                href={`https://twitter.com/intent/tweet?text=${selectedQuote.quote} - ${selectedQuote.author}&hashtags=hashtag`}
+            >
+                <FontAwesomeIcon icon={faTwitter} size="md"></FontAwesomeIcon>
             </IconButton>
         </CardActions>
-        
     </Card>
 );
 
