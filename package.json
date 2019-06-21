@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@material-ui/core": "^4.0.0-rc.0",
     "@typescript-eslint/parser": "^1.10.2",
     "lodash": "^4.17.11",
     "react": "^16.8.6",
